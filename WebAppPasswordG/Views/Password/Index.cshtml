@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Calcular";
+}
+<style>
+    td, th {
+        padding: 10px;
+    }
+</style>
+<div align="center">
+    <h2>Generador De Contraseñas</h2> @using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <th>longitud</th>
+                <td> <input type="text" id="txtlongitud" name="longitud" class="form-control" required /> </td>
+            </tr>
+            <tr>
+                <th>numeros </th>
+                <td> <input type="checkbox" id="txtnumeros" name="numeros" value="true" class="form-control" /> </td>
+            </tr>
+            <tr>
+                <th>simbolos</th>
+                <td> <input type="checkbox" id="txtsimbolos" name="simbolos" value="true" class="form-control" /> </td>
+            </tr>
+            <tr>
+                <th>mayusculas</th>
+                <td> <input type="checkbox" id="txtmayusculas" name="mayusculas" value="true" class="form-control" /> </td>
+            </tr>
+            <tr>
+                <th>minusculas</th>
+                <td> <input type="checkbox" id="txtminusculas" name="minusculas" value="true" class="form-control" /> </td>
+            </tr>
+            <tr>
+                <th><input type="submit" name="Generar" value="Generar" class="btn btn-primary" /></th>
+            </tr>
+            <tr>
+                <th>Contraseña</th>
+                <td><input type="text" class="form-control" value="@ViewBag.Result" size="20" /> </td>
+            </tr>
+        </table>}
+</div>
+
+
+
