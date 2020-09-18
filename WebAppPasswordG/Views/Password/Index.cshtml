@@ -10,10 +10,10 @@
             {
                 <br />
                 <div class="input-group input-group-lg">
-                    <div class="input-group-prepend" onclick="copiarAlPortapapeles('password')">
-                        <span class="input-group-text" id="inputGroup-sizing-lg">Pass</span>
-                    </div>
                     <input type="text" id="password" class="form-control" aria-label="Sizing example input" value="@ViewBag.Result" aria-describedby="inputGroup-sizing-lg">
+                    <div class="input-group-prepend" onclick="myFunction()">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Copy</span>
+                    </div>
                 </div>
                 <br />
                 <div class="form-check form-check-inline">
@@ -39,20 +39,44 @@
 
                 <input type="submit" name="Generar" value="Generar" class="btn btn-primary" />
 
+                <div class="alert alert-warning" role="alert" style="visibility:hidden" id="alta">
+                    Seguridad Alta
+                </div>
+                <div class="alert alert-success" role="alert" style="visibility:hidden">
+                    Seguridad Media
+                </div>
+                <div class="alert alert-danger" role="alert" style="visibility:hidden">
+                    Seguridad Baja
+                </div>
 
             }
 
         </div>
     </body>
 </html>
+<br />
+
+
+
 <script type="text/javascript">
-    function copiarAlPortapapeles(id_elemento) {
-        var aux = document.createElement("input");
-        aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
-        document.body.appendChild(aux);
-        aux.select();
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("password");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
         document.execCommand("copy");
-        document.body.removeChild(aux);
+
+        /* Alert the copied text */
+       
+    }
+
+    function seguridad() {
+        document.getElementById("alta").style ="visibility:visible";
+
     }
 
 
