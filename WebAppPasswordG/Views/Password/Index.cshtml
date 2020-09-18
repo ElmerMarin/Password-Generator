@@ -1,44 +1,60 @@
 ﻿@{
-    ViewBag.Title = "Calcular";
+    ViewBag.Title = "Password Generator";
 }
-<style>
-    td, th {
-        padding: 10px;
+
+    <html>
+    <head></head>
+    <body>
+        <div align="center">
+            <h2></h2> @using (Html.BeginForm())
+            {
+                <br />
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend" onclick="copiarAlPortapapeles('password')">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Pass</span>
+                    </div>
+                    <input type="text" id="password" class="form-control" aria-label="Sizing example input" value="@ViewBag.Result" aria-describedby="inputGroup-sizing-lg">
+                </div>
+                <br />
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="txtlongitud" style="padding-right:10px">Longitud</label>
+                    <input type="number" id="txtlongitud" name="longitud" class="form-control" min='1' max="256" required />
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="txtnumeros" name="numeros" value="true">
+                    <label class="form-check-label" for="txtnumeros">numeros</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="txtsimbolos" name="simbolos" value="true" />
+                    <label class="form-check-label" for="txtsimbolos">simbolos</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="txtmayusculas" name="mayusculas" value="true" />
+                    <label class="form-check-label" for="txtmayusculas">mayusculas</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="txtminusculas" name="minusculas" value="true" />
+                    <label class="form-check-label" for="txtminusculas">minusculas</label>
+                </div>
+
+                <input type="submit" name="Generar" value="Generar" class="btn btn-primary" />
+
+
+            }
+
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    function copiarAlPortapapeles(id_elemento) {
+        var aux = document.createElement("input");
+        aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
     }
-</style>
-<div align="center">
-    <h2>Generador De Contraseñas</h2> @using (Html.BeginForm())
-    {
-        <table>
-            <tr>
-                <th>longitud</th>
-                <td> <input type="text" id="txtlongitud" name="longitud" class="form-control" required /> </td>
-            </tr>
-            <tr>
-                <th>numeros </th>
-                <td> <input type="checkbox" id="txtnumeros" name="numeros" value="true" class="form-control" /> </td>
-            </tr>
-            <tr>
-                <th>simbolos</th>
-                <td> <input type="checkbox" id="txtsimbolos" name="simbolos" value="true" class="form-control" /> </td>
-            </tr>
-            <tr>
-                <th>mayusculas</th>
-                <td> <input type="checkbox" id="txtmayusculas" name="mayusculas" value="true" class="form-control" /> </td>
-            </tr>
-            <tr>
-                <th>minusculas</th>
-                <td> <input type="checkbox" id="txtminusculas" name="minusculas" value="true" class="form-control" /> </td>
-            </tr>
-            <tr>
-                <th><input type="submit" name="Generar" value="Generar" class="btn btn-primary" /></th>
-            </tr>
-            <tr>
-                <th>Contraseña</th>
-                <td><input type="text" class="form-control" value="@ViewBag.Result" size="20" /> </td>
-            </tr>
-        </table>}
-</div>
 
 
 
+</script>
