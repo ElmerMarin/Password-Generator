@@ -6,50 +6,45 @@
     <head></head>
     <body>
         <div align="center">
-            <h2></h2> @using (Html.BeginForm())
-            {
+            <h2></h2> 
                 <br />
-                <div class="input-group input-group-lg">
-                    <input type="text" id="password" class="form-control" aria-label="Sizing example input" value="@ViewBag.Result" aria-describedby="inputGroup-sizing-lg">
-                    <div class="input-group-prepend" onclick="myFunction()">
-                        <span class="input-group-text" id="inputGroup-sizing-lg">Copy</span>
+                <form>
+                    <div style="padding-top:60px;">
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Password Generator">
+                        <div class="input-group-prepend" onclick="myFunction()">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Copy</span>
+                        </div>
                     </div>
-                </div>
-                <br />
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="txtlongitud" style="padding-right:10px">Longitud</label>
-                    <input type="number" id="txtlongitud" name="longitud" class="form-control" min='1' max="256" required />
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="txtnumeros" name="numeros" value="true">
-                    <label class="form-check-label" for="txtnumeros">numeros</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="txtsimbolos" name="simbolos" value="true" />
-                    <label class="form-check-label" for="txtsimbolos">simbolos</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="txtmayusculas" name="mayusculas" value="true" />
-                    <label class="form-check-label" for="txtmayusculas">mayusculas</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="txtminusculas" name="minusculas" value="true" />
-                    <label class="form-check-label" for="txtminusculas">minusculas</label>
-                </div>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="txtlongitud" style="padding-right:10px">Longitud</label>
+                        <input type="number" id="txtlongitud" name="longitud" class="form-control" min='1' max="256" required />
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="txtnumeros" name="numeros">
+                        <label class="form-check-label" for="txtnumeros">numeros</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="txtsimbolos" name="simbolos">
+                        <label class="form-check-label" for="txtsimbolos">simbolos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="txtmayusculas" name="mayusculas">
+                        <label class="form-check-label" for="txtmayusculas">mayusculas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="txtminusculas" name="minusculas">
+                        <label class="form-check-label" for="txtminusculas">minusculas</label>
+                    </div>
 
-                <input type="submit" name="Generar" value="Generar" class="btn btn-primary" />
+                    <input type="button" name="Generar" value="Generar" class="btn btn-primary" onclick="seguridad()" />
+                    </div><br />
+                    <div class="alert alert-success" role="alert" style="visibility:hidden" id="alta">
+                        Seguridad Alta
+                    </div>
 
-                <div class="alert alert-warning" role="alert" style="visibility:hidden" id="alta">
-                    Seguridad Alta
-                </div>
-                <div class="alert alert-success" role="alert" style="visibility:hidden">
-                    Seguridad Media
-                </div>
-                <div class="alert alert-danger" role="alert" style="visibility:hidden">
-                    Seguridad Baja
-                </div>
-
-            }
+                </form>
 
         </div>
     </body>
@@ -71,14 +66,95 @@
         document.execCommand("copy");
 
         /* Alert the copied text */
-       
+
     }
+
+    function verificar() {
+
+        document.getElementById("alta").style.visibility = 'hidden';
+        document.getElementById("password").value = '';
+        longitud = document.getElementById("txtlongitud").value;
+        numeros = $("#txtnumeros").is(":checked");
+        minusculas = $("#txtminusculas").is(":checked");
+        mayusculas = $("#txtmayusculas").is(":checked");
+        simbolos = $("#txtsimbolos").is(":checked");
+
+        if (numeros) {
+            numeros = document.getElementById("txtnumeros").value = true;
+        }
+        else {
+            numeros = document.getElementById("txtnumeros").value = false;
+        }
+        if (minusculas) {
+            minusculas = document.getElementById("txtminusculas").value = true;
+        }
+        else {
+            minusculas = document.getElementById("txtminusculas").value = false;
+        }
+        if (mayusculas) {
+            mayusculas = document.getElementById("txtmayusculas").value = true;
+        }
+        else {
+            mayusculas = document.getElementById("txtmayusculas").value = false;
+        }
+
+        if (simbolos) {
+            simbolos = document.getElementById("txtsimbolos").value = true;
+        }
+        else {
+            simbolos = document.getElementById("txtsimbolos").value = false;
+        }
+
+
+        if (numeros && simbolos && mayusculas && minusculas && longitud != "") {
+            document.getElementById("alta").style = "visibility:visible";
+            document.getElementById("alta").innerText = 'seguridad alta';
+            document.getElementById("alta").className = "alert alert-success";
+
+        } else if (numeros && (simbolos || minusculas || mayusculas) && longitud != "" || simbolos && (minusculas || mayusculas) && longitud != "" || mayusculas && simbolos && longitud != "") {
+            document.getElementById("alta").style = "visibility:visible";
+            document.getElementById("alta").innerText = 'seguridad media';
+            document.getElementById("alta").className = "alert alert-warning";
+
+        }
+        else if ((numeros || simbolos || mayusculas || minusculas) && longitud != "") {
+            document.getElementById("alta").style = "visibility:visible";
+            document.getElementById("alta").innerText = 'seguridad baja';
+            document.getElementById("alta").className = "alert alert-danger";
+
+        }
+
+    }
+
 
     function seguridad() {
-        document.getElementById("alta").style ="visibility:visible";
+
+        verificar();
+
+        if (document.getElementById("txtlongitud").value != "" && (numeros == true || minusculas == true || mayusculas == true || simbolos==true)) {
+            $.ajax({
+                url: "@Url.Action("Index", "Password")",
+                type: 'POST',
+                dataType: 'json',
+                data: { numeros: numeros, minusculas: minusculas, mayusculas: mayusculas, simbolos: simbolos, longitud: longitud },
+            })
+                .done(function (respuesta) {
+                    document.getElementById("password").value = respuesta;
+
+                })
+                .fail(function () {
+                    console.log("error");
+                })
+        }
+        else {
+            document.getElementById("alta").style = "visibility:visible";
+            document.getElementById("alta").innerText = 'error';
+            document.getElementById("alta").className = "alert alert-primary";
+
+        }
+
 
     }
-
 
 
 </script>

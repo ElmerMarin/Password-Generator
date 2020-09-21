@@ -79,7 +79,8 @@ namespace WebAppPasswordG.Controllers
 
 
             ViewBag.Result = contraseniaAleatoria;
-            return View();
+            return Json(contraseniaAleatoria);
+            
         }
     }
 }
